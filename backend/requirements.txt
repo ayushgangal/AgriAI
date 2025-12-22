@@ -1,0 +1,65 @@
+# ...........................................................
+# FastAPI and Core Libraries
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+email-validator
+python-multipart
+httpx
+python-jose[cryptography]
+passlib[bcrypt]
+PyJWT
+python-dotenv
+
+# AI/ML Libraries
+openai
+langchain
+langchain-openai
+transformers
+torch
+torchvision
+pillow
+numpy
+pandas
+scikit-learn
+
+# Data Processing
+requests
+beautifulsoup4
+lxml
+feedparser
+
+# Database
+sqlalchemy
+alembic
+
+# Weather and Geospatial
+geopy
+pyowm
+
+# Voice Processing
+speechrecognition
+pyaudio
+
+# Image Processing
+opencv-python
+
+# Multilingual Support
+# Removing the problematic googletrans and its constraint
+deep-translator
+indic-transliteration
+
+# Caching and Performance
+redis
+celery
+
+# Testing
+pytest
+pytest-asyncio
+yfinance
+
+# Development
+black
+flake8
+mypy

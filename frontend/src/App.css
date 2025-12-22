@@ -1,0 +1,103 @@
+/* --- GLOBAL RESET & THEME BASE --- */
+:root {
+  --nature-black: #080d0b;
+  --accent-green: #00ffab;
+  --accent-cyan: #00e5ff;
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  margin: 0;
+  background-color: var(--nature-black);
+  color: #f0f4f2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* --- THE BIOLUMINESCENT SCROLLBAR --- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--nature-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 171, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 171, 0.05);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 171, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 171, 0.2);
+}
+
+/* --- ANTIGRAVITY UTILITIES --- */
+.page-container {
+  min-height: 100vh;
+  position: relative;
+  background: radial-gradient(circle at 50% -20%, rgba(0, 255, 171, 0.05), transparent 50%);
+}
+
+/* Smooth internal page transitions */
+main {
+  animation: fadeInApp 1s ease-out;
+}
+
+@keyframes fadeInApp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- GLASSMORPHISM ENHANCEMENTS --- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom selection color (Glowing Green) */
+::selection {
+  background: rgba(0, 255, 171, 0.3);
+  color: #fff;
+}
+
+/* --- REMOVING REACT BOILERPLATE CLASSES --- */
+/* (We replace .App-logo and .App-header with our custom logic) */
+
+.App-logo {
+  display: none;
+  /* We use the 3D Spline Plant instead */
+}
+
+/* --- MESH GRADIENT TEXTURE --- */
+.bg-grain {
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- UTILITY FOR SLOW FLOATING --- */
+.animate-float-slow {
+  animation: floatApp 8s ease-in-out infinite;
+}
+
+@keyframes floatApp {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
