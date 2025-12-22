@@ -59,12 +59,17 @@ cd AgriAI_Hackathon
 
 # Backend setup
 cd backend
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 python main.py
+pip install "bcrypt==4.0.1"
+uvicorn main:app --reload
 
 # Frontend setup
 cd ../frontend
 npm install
+npm install lucide-react
 npm start
 ```
 

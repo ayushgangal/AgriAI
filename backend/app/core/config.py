@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     
     # AI/ML settings
     OPENAI_API_KEY: Optional[str] = None
+    GOOGLE_API_KEY: str | None = None
     OPENAI_MODEL: str = "gpt-4"
     MAX_TOKENS: int = 2000
     

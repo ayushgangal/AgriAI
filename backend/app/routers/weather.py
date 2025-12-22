@@ -52,3 +52,19 @@ async def get_agricultural_alerts(
     except Exception as e:
         logger.error(f"Error getting agricultural alerts: {str(e)}")
         raise HTTPException(status_code=500, detail="Unable to fetch alerts") 
+    
+@router.get("/recommendations")
+async def get_agricultural_recommendations(
+    latitude: float,
+    longitude: float,
+    user = Depends(get_current_user)
+):
+    """Get AI-driven agricultural recommendations"""
+    try:
+        # This calls the new function you created in WeatherService
+        recommendations = await weather_service.get_agricultural_recommendations(latitude, longitude)
+        return recommendations
+    except Exception as e:
+        logger.error(f"Error getting recommendations: {str(e)}")
+        # Return an error compatible with your frontend
+        raise HTTPException(status_code=500, detail="Unable to fetch recommendations")
