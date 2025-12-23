@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/ayushgangal/AgriAI_Hackathon/backend/venv-3.11
+set -gx VIRTUAL_ENV /home/ayushgangal/AgriAI/backend/venv-3.11
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

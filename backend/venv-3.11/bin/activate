@@ -35,11 +35,11 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV=$(cygpath "C:\Users\Anvesh S. Pradhan\OneDrive\Desktop\AgriAI_Hackathon\backend\venv-3.11")
+VIRTUAL_ENV=/home/ayushgangal/AgriAI/backend/venv-3.11
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
-PATH="$VIRTUAL_ENV/bin:$PATH"
+PATH="$VIRTUAL_ENV/"bin":$PATH"
 export PATH
 
 # unset PYTHONHOME if set
@@ -52,9 +52,9 @@ fi
 
 if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
     _OLD_VIRTUAL_PS1="${PS1:-}"
-    PS1="(venv-3.11) ${PS1:-}"
+    PS1='(venv-3.11) '"${PS1:-}"
     export PS1
-    VIRTUAL_ENV_PROMPT="(venv-3.11) "
+    VIRTUAL_ENV_PROMPT='(venv-3.11) '
     export VIRTUAL_ENV_PROMPT
 fi
 

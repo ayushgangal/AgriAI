@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { PaperAirplaneIcon, MicrophoneIcon, PhotoIcon, SparklesIcon, ShareIcon, BeakerIcon } from '@heroicons/react/24/outline';
-import { useProcessQuery, useProcessVoiceQuery, useProcessImageQuery, useQueryHistory, useSubmitFeedback, useQueryTypes } from '../hooks/useAPI';
+import { PaperAirplaneIcon, MicrophoneIcon, PhotoIcon, SparklesIcon, BeakerIcon } from '@heroicons/react/24/outline';
+import { useProcessQuery, useProcessVoiceQuery, useProcessImageQuery, useQueryHistory, useQueryTypes } from '../hooks/useAPI';
 import toast from 'react-hot-toast';
 import gsap from 'gsap';
+
+// ✅ IMPORT MARKDOWN RENDERER
+import ReactMarkdown from 'react-markdown';
 
 const Chat = () => {
   const [messages, setMessages] = useState([
@@ -20,16 +23,11 @@ const Chat = () => {
 
   // API hooks
   const processQueryMutation = useProcessQuery();
-  const processVoiceMutation = useProcessVoiceQuery();
-  const processImageMutation = useProcessImageQuery();
   const { data: queryHistory } = useQueryHistory(10, 0);
-  const { data: queryTypes } = useQueryTypes();
 
   // --- ANTIGRAVITY ANIMATION ---
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-
-    // Staggered entrance for the latest message
     const lastMsg = chatContainerRef.current?.lastElementChild;
     if (lastMsg) {
       gsap.fromTo(lastMsg, { opacity: 0, y: 20, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.4)" });
@@ -59,7 +57,7 @@ const Chat = () => {
       };
       setMessages(prev => [...prev, aiMessage]);
     } catch (error) {
-      toast.error("Telemetry error. Re-establishing connection...");
+      toast.error("Telemetry error. Connection lost.");
     }
   };
 
@@ -99,7 +97,21 @@ const Chat = () => {
                   </div>
                 )}
 
-                <p className="text-sm leading-relaxed mb-3">{message.text}</p>
+                {/* ✅ REPLACED PLAIN TEXT WITH MARKDOWN RENDERER */}
+                <div className="text-sm leading-relaxed mb-3 markdown-content">
+                  <ReactMarkdown
+                    components={{
+                      // Custom styling for bold text to match your theme
+                      strong: ({node, ...props}) => <span className="font-bold text-accent-cyan" {...props} />,
+                      // Custom styling for lists
+                      ul: ({node, ...props}) => <ul className="list-disc pl-5 my-2 space-y-1" {...props} />,
+                      li: ({node, ...props}) => <li className="text-gray-200" {...props} />,
+                      p: ({node, ...props}) => <p className="mb-2" {...props} />
+                    }}
+                  >
+                    {message.text}
+                  </ReactMarkdown>
+                </div>
 
                 {/* AI Metadata Tags */}
                 {message.type === 'ai' && message.queryType !== 'init' && (
@@ -111,19 +123,7 @@ const Chat = () => {
                     ))}
                   </div>
                 )}
-
-                {/* Recommendations Bubble */}
-                {message.recommendations && (
-                  <div className="mt-4 grid grid-cols-1 gap-2">
-                    {message.recommendations.map((rec, i) => (
-                      <div key={i} className="flex items-start gap-2 p-3 rounded-2xl bg-accent-green/5 border border-accent-green/10 text-[11px] text-gray-300">
-                        <BeakerIcon className="h-4 w-4 text-accent-green shrink-0 mt-0.5" />
-                        {rec}
-                      </div>
-                    ))}
-                  </div>
-                )}
-
+                
                 <span className="absolute -bottom-5 left-2 text-[9px] text-gray-600 uppercase tracking-widest">
                   {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </span>
@@ -133,7 +133,7 @@ const Chat = () => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* FLOATING COMMAND BAR */}
+        {/* INPUT AREA */}
         <div className="mt-auto px-4">
           <div className="glass-card p-2 rounded-[2.5rem] bg-white/[0.02] border-white/10 shadow-2xl">
             <form onSubmit={handleSubmit} className="flex items-center gap-2">
@@ -162,21 +162,6 @@ const Chat = () => {
             </form>
           </div>
         </div>
-
-        {/* KNOWLEDGE SPORES (Quick Questions) */}
-        <div className="mt-6 flex gap-3 overflow-x-auto no-scrollbar px-4">
-          {["Best crop for Punjab?", "Irrigation for Wheat?", "Market Price: Rice", "Weather Alert"].map((q, i) => (
-            <button
-              key={i}
-              onClick={() => setInputText(q)}
-              className="animate-float whitespace-nowrap px-4 py-2 rounded-full glass-card border-white/5 bg-white/[0.01] text-[10px] text-gray-400 hover:text-accent-green hover:border-accent-green/30 transition-all"
-              style={{ animationDelay: `${i * 0.5}s` }}
-            >
-              {q}
-            </button>
-          ))}
-        </div>
-
       </div>
     </div>
   );

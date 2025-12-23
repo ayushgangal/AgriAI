@@ -1,6 +1,12 @@
+import warnings
+warnings.filterwarnings("ignore")
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # This loads the keys from your .env file
 
 # Import your application's routers
 from app.routers import queries, weather, crops, finance, voice, auth, crop_api
@@ -11,6 +17,8 @@ app = FastAPI(
     description="API for the AgriAI agricultural advisor application.",
     version="1.0.0",
 )
+
+api_key = os.getenv("GEMINI_API_KEY")
 
 # --- CORS Middleware Configuration ---
 # This is the crucial part that allows your frontend to connect.
