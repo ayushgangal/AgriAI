@@ -26,4 +26,4 @@ class CropData(CropDataBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

@@ -63,3 +63,7 @@ yfinance
 black
 flake8
 mypy
+bcrypt==4.0.1
+google.generativeai
+google.genai
+google-genai

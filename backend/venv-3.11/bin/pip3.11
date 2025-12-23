@@ -1,4 +1,4 @@
-#!/home/ayushgangal/AgriAI_Hackathon/backend/venv-3.11/bin/python3.11
+#!/home/ayushgangal/AgriAI/backend/venv-3.11/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys

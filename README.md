@@ -70,6 +70,7 @@ uvicorn main:app --reload
 cd ../frontend
 npm install
 npm install lucide-react
+npm install react-markdown
 npm start
 ```
 
